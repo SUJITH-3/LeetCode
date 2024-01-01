@@ -27,7 +27,9 @@ Explanation: (4 + (13 / 5)) = 6
             }
              else if(str.equals("-"))
             {
-                stack.push(stack.pop()-stack.pop());
+                int a=stack.pop();
+                int b=stack.pop();
+                stack.push(b-a);
             }
              else if(str.equals("*"))
             {
