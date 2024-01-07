@@ -15,20 +15,23 @@ Output: 21
     public int reverse(int x) {
         long rem=0;
         int a;
-        while(x!=0)
+        boolean sign=true;
+        if(x<0)
+        sign=false;
+        x=Math.abs(x);
+        while(x>0)
         {
             a=x%10;
             rem=rem*10+a;
             x=x/10;
         }
-
+        System.out.print(x);
         if(rem<Integer.MIN_VALUE||rem>Integer.MAX_VALUE)
         return 0;
-        if(x<0)
+        if(!sign)
         return (int)(-1*rem);
     
         return (int)rem;
 
     }
 }
- 
