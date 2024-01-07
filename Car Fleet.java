@@ -38,29 +38,28 @@ Then, the fleet (speed 2) and the car starting at 4 (speed 1) become one fleet, 
 
 class Solution {
     public int carFleet(int target, int[] position, int[] speed) {
-         int n = position.length;
-        int[][] positionSpeed = new int[n][2];
-        for(int i=0; i<n; i++){
-           positionSpeed[i][0] = position[i];
-           positionSpeed[i][1] = speed[i];
+        Map <Integer,Float>map=new HashMap<>();
+        int fleet=position.length;
+        for(int i=0;i<position.length;i++)
+        {
+            float time=((float)target-position[i])/speed[i];
+            map.put(position[i],time);
         }
-		
-        Arrays.sort(positionSpeed, (a,b)->(b[0]-a[0]));//sort by position
-		
-        int fleets = 0;
-        float lastTime = 0; //time taken by last fleet to reach target
-        for(int[] poll : positionSpeed){
-            float dist = lastTime * poll[1];
-            float distToCover = target - poll[0];
-            
-            if(dist < distToCover){//new fleet start
-                fleets++;
-                lastTime = distToCover/poll[1];
+        Arrays.sort(position);
+        int i=position.length-1;
+        while(i>0)
+        {
+            float val=map.get(position[i]);
+            i--;
+            while(i>=0&&val>=(float)map.get(position[i]))
+            {
+                fleet--;
+                i--;
             }
+          
         }
-        return fleets;
+        return fleet;
     }
 }
-
 
   
