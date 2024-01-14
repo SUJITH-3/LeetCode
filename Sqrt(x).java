@@ -17,21 +17,29 @@ Output: 2
 Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
 
 
-  class Solution {
+class Solution {
     public int mySqrt(int x) {
-                if(x<0) return -1;
-        int low = 1; int high = x; int res = 0;
-        while(low<=high){
-            int mid = low + (high-low)/2;
-            if(mid<=x/mid){
-                res = mid;
-                low = mid+1;
+        long low=0;
+        long high=x;
+        long ans=0;
+        while(low<=high)
+        {
+            long mid=(low+high)/2;
+            if(mid*mid==x)
+            {
+                return(int) mid;
             }
-            else{
-                high = mid-1;
+            else if(mid*mid>x)
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+                ans=mid;
             }
         }
-        return res;
+        return(int)ans;
 
     }
 }
